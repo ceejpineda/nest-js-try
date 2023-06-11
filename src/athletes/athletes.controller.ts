@@ -21,16 +21,18 @@ export class AthletesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.athletesService.findOne(id);
+    return this.athletesService.getSingleAthlete(id);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateAthleteDto: UpdateAthleteDto) {
-  //   return this.athletesService.update(+id, updateAthleteDto);
-  // }
+  @Patch(':id')
+  async update(@Param('id') id: string, @Body('name') name: string, @Body('sport') sport: string) {
+    await this.athletesService.update(id, name, sport);
+    return null;
+  }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.athletesService.remove(+id);
+  async remove(@Param('id') id: string) {
+    await this.athletesService.remove(id);
+    return null;
   }
 }

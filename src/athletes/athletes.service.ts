@@ -50,18 +50,31 @@ export class AthletesService {
       throw new HttpException('Could not find athlete.', 404);
     }
     
-    return {
-      id: athlete.id,
-      name: athlete.name,
-      sport: athlete.sport
+    return athlete;
+
+  }
+
+  async getSingleAthlete(id: string){
+    const athlete = await this.findOne(id);
+    return { id: athlete.id, name: athlete.name, sport: athlete.sport }
+  }
+
+  async update(id: string, name: string, sport: string) {
+
+    let updatedAthlete = await this.findOne(id);
+    console.log(updatedAthlete)
+
+    if(name){
+      updatedAthlete.name = name;
     }
+    if(sport){
+      updatedAthlete.sport = sport;
+    }
+
+    updatedAthlete.save()
   }
 
-  update(id: number, updateAthleteDto: UpdateAthleteDto) {
-    return `This action updates a #${id} athlete`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} athlete`;
+  async remove(id: string) {
+    await this.athleteModel.deleteOne({_id: id}).exec();
   }
 }

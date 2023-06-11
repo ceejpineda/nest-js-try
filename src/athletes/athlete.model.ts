@@ -5,7 +5,7 @@ export const AthleteSchema = new mongoose.Schema({
     sport: {type: String, required: true}
 });
 
-export interface Athlete {
+export interface Athlete extends mongoose.Document {
     id: string,
     name: string,
     sport: string
