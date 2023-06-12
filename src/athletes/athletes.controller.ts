@@ -1,5 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { AthletesService } from './athletes.service';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { UseGuards } from '@nestjs/common';
 
 @Controller('athletes')
 export class AthletesController {
@@ -14,6 +16,7 @@ export class AthletesController {
     return {id: generatedID};
   }
 
+  @UseGuards(AuthGuard)
   @Get()
   findAll() {
     return this.athletesService.findAll();
@@ -35,4 +38,5 @@ export class AthletesController {
     await this.athletesService.remove(id);
     return null;
   }
+  
 }

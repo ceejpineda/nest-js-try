@@ -6,6 +6,8 @@ import { AppService } from './app.service';
 import { AthletesController } from './athletes/athletes.controller';
 import { AthletesModule } from './athletes/athletes.module';
 import { APP_FILTER } from '@nestjs/core';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 /*
   Documentation: CJ PINEDA
@@ -14,7 +16,7 @@ import { APP_FILTER } from '@nestjs/core';
 */
 
 @Module({
-  imports: [AthletesModule, MongooseModule.forRoot(`mongodb+srv://cjnest:a5fQRfA1qFkdK9pR@cluster0.vxcqnga.mongodb.net/?retryWrites=true&w=majority`)],
+  imports: [AthletesModule, MongooseModule.forRoot(`mongodb+srv://cjnest:a5fQRfA1qFkdK9pR@cluster0.vxcqnga.mongodb.net/?retryWrites=true&w=majority`), AuthModule, UsersModule],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_FILTER,
